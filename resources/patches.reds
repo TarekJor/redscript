@@ -26,21 +26,7 @@ public final static func CanPartBeUnequipped(itemID: ItemID) -> Bool {
   return true;
 }
 
-/* add main menu options */
-@replaceMethod(SingleplayerMenuGameController)
-private func PopulateMenuItemList() {
-  if this.m_savesCount > 0 {
-    this.AddMenuItem(GetLocalizedText("UI-ScriptExports-Continue0"), PauseMenuAction.QuickLoad);
-  };
-  this.AddMenuItem(GetLocalizedText("UI-ScriptExports-NewGame0"), n"OnNewGame");
-  this.AddMenuItem(GetLocalizedText("UI-ScriptExports-LoadGame0"), n"OnLoadGame");
-  this.AddMenuItem(GetLocalizedText("UI-Labels-Settings"), n"OnSwitchToSettings");
-  this.AddMenuItem(GetLocalizedText("UI-Labels-Credits"), n"OnSwitchToCredits");
-  this.AddMenuItem("DEBUG NEW GAME", n"OnDebug");
-  this.AddMenuItem("TOGGLE GOG MENU", n"OnGOGProfile");
-  this.m_menuListController.Refresh();
-  this.SetCursorOverWidget(inkCompoundRef.GetWidgetByIndex(this.m_menuList, 0));
-}
+
 
 /* sell edibles as junk automatically at vendors */
 @replaceMethod(FullscreenVendorGameController)
@@ -58,7 +44,6 @@ private final func GetSellableJunk() -> array<wref<gameItemData>> {
   };
   return result;
 }
-
 
 /* switch cases fallthrough, break not supported yet (required by UpgradeItem patch) */
 func CalculateCraftingExp(quality: gamedataQuality) -> Int32 {

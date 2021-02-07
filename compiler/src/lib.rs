@@ -21,6 +21,7 @@ use walkdir::WalkDir;
 use crate::parser::{ClassSource, Declaration, FunctionSource, MemberSource, Qualifier, SourceEntry};
 
 pub mod assembler;
+pub mod ir;
 pub mod parser;
 pub mod scope;
 pub mod source_map;
@@ -260,7 +261,7 @@ impl<'a> Compiler<'a> {
     fn define_field(
         &mut self,
         field: Declaration,
-        type_: TypeName,
+        type_: TypeName<String>,
         parent: PoolIndex<Class>,
     ) -> Result<PoolIndex<Field>, Error> {
         let name = self.pool.names.add(field.name);
@@ -367,7 +368,6 @@ impl<'a> Compiler<'a> {
 pub enum Reference {
     Local(PoolIndex<Local>),
     Parameter(PoolIndex<Parameter>),
-    Field(PoolIndex<Field>),
     Class(PoolIndex<Class>),
     Enum(PoolIndex<Enum>),
 }
